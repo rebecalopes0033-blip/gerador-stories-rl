@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>RL Marketing — Gerador de Stories</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#e8e3dc;
+  --bg-soft:#f0ece5;
+  --white:#faf8f5;
+  --primary:#8a5d44;
+  --primary-dark:#6e4836;
+  --primary-light:#b08060;
+  --text:#2b231e;
+  --muted:#7a6e66;
+  --border:#cdc7bf;
+  --soft:#f5f2ee;
+  --gold:#c9a96e;
+  --story-bg:#3d2e25;
+  --story-text:#fff;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100%;background:var(--bg);font-family:'DM Sans',system-ui,sans-serif;color:var(--text);-webkit-font-smoothing:antialiased}
+
+/* HEADER */
+header{
+  background:linear-gradient(135deg,var(--primary) 0%,var(--primary-dark) 100%);
+  padding:40px 24px 32px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+header::before{
+  content:'';position:absolute;top:-60px;right:-60px;
+  width:220px;height:220px;background:rgba(255,255,255,.06);border-radius:50%;
+}
+header::after{
+  content:'';position:absolute;bottom:-80px;left:-40px;
+  width:180px;height:180px;background:rgba(255,255,255,.04);border-radius:50%;
+}
+header h1{
+  font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-weight:500;
+  font-size:52px;color:#fff;letter-spacing:1px;position:relative;z-index:1;
+}
+header p{
+  color:rgba(255,255,255,.8);font-size:13px;font-weight:300;
+  letter-spacing:.8px;margin-top:4px;position:relative;z-index:1;
+}
+
+/* CONTAINER */
+.container{max-width:900px;margin:0 auto;padding:32px 20px 60px}
+
+/* INTRO */
+.intro{
+  background:var(--white);border:1px solid var(--border);border-radius:16px;
+  padding:24px 28px;margin-bottom:32px;border-left:4px solid var(--gold);
+}
+.intro p{font-size:14px;color:var(--muted);line-height:1.7}
+.intro strong{color:var(--primary);font-weight:600}
+
+/* ESTRATÉGIAS GRID */
+.strategies-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  gap:16px;margin-bottom:40px;
+}
+.strategy-card{
+  background:var(--white);border:1px solid var(--border);border-radius:16px;
+  padding:22px;cursor:pointer;transition:all .25s ease;position:relative;overflow:hidden;
+}
+.strategy-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--primary),var(--gold));
+  transform:scaleX(0);transition:transform .3s ease;transform-origin:left;
+}
+.strategy-card:hover{
+  box-shadow:0 8px 32px rgba(138,93,68,.15);transform:translateY(-2px);
+  border-color:var(--primary-light);
+}
+.strategy-card:hover::before{transform:scaleX(1)}
+.strategy-card.active{border-color:var(--primary);box-shadow:0 8px 32px rgba(138,93,68,.2)}
+.strategy-card.active::before{transform:scaleX(1)}
+.card-num{
+  font-family:'Cormorant Garamond',serif;font-size:42px;font-style:italic;
+  color:var(--border);line-height:1;margin-bottom:8px;transition:color .2s;
+}
+.strategy-card:hover .card-num,.strategy-card.active .card-num{color:var(--primary-light)}
+.card-title{font-size:14px;font-weight:600;color:var(--text);margin-bottom:6px}
+.card-desc{font-size:12px;color:var(--muted);line-height:1.5;margin-bottom:14px}
+.card-how{
+  font-size:11px;font-weight:500;color:var(--primary);
+  background:rgba(138,93,68,.08);padding:6px 10px;border-radius:6px;line-height:1.4;
+}
+
+/* FORM SECTION */
+.form-section{
+  background:var(--white);border:1px solid var(--border);border-radius:18px;
+  padding:32px;margin-bottom:24px;display:none;
+}
+.form-section.visible{display:block}
+.form-header{
+  display:flex;align-items:flex-start;gap:16px;
+  margin-bottom:28px;padding-bottom:20px;border-bottom:1px solid var(--border);
+}
+.form-num{
+  font-family:'Cormorant Garamond',serif;font-size:56px;font-style:italic;
+  color:var(--primary-light);line-height:1;flex-shrink:0;
+}
+.form-title{font-size:20px;font-weight:600;color:var(--text);margin-bottom:4px}
+.form-sub{font-size:13px;color:var(--muted);line-height:1.5}
+.form-tip{
+  background:rgba(201,169,110,.1);border-left:3px solid var(--gold);
+  border-radius:0 8px 8px 0;padding:12px 16px;margin-bottom:24px;
+  font-size:12px;color:var(--muted);font-style:italic;line-height:1.5;
+}
+.field{margin-bottom:20px}
+.label{display:block;font-size:13px;font-weight:500;color:var(--text);margin-bottom:8px;line-height:1.4}
+.label-hint{display:block;font-size:11px;color:var(--muted);font-weight:400;margin-top:2px;font-style:italic}
+input[type=text],textarea{
+  width:100%;padding:12px 16px;border:1.5px solid var(--border);border-radius:10px;
+  font-family:'DM Sans',sans-serif;font-size:14px;background:var(--bg-soft);
+  color:var(--text);transition:border-color .2s,box-shadow .2s;resize:none;
+}
+textarea{min-height:90px;line-height:1.6}
+input:focus,textarea:focus{
+  outline:none;border-color:var(--primary);
+  box-shadow:0 0 0 3px rgba(138,93,68,.1);background:#fff;
+}
+
+/* BTN GERAR */
+.btn-gerar{
+  width:100%;padding:16px;
+  background:linear-gradient(135deg,var(--primary) 0%,var(--primary-dark) 100%);
+  color:#fff;border:none;border-radius:12px;font-family:'DM Sans',sans-serif;
+  font-size:15px;font-weight:600;cursor:pointer;transition:all .25s ease;
+  letter-spacing:.3px;margin-top:8px;display:flex;align-items:center;
+  justify-content:center;gap:10px;
+}
+.btn-gerar:hover{box-shadow:0 8px 24px rgba(138,93,68,.35);transform:translateY(-1px)}
+.btn-gerar:disabled{opacity:.6;cursor:not-allowed;transform:none;box-shadow:none}
+.btn-gerar .spinner{
+  width:18px;height:18px;border:2.5px solid rgba(255,255,255,.3);
+  border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;display:none;
+}
+.btn-gerar.loading .spinner{display:block}
+.btn-gerar.loading .btn-text{display:none}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* OUTPUT */
+.output-section{display:none;margin-top:8px}
+.output-section.visible{display:block}
+.output-header{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:20px;flex-wrap:wrap;gap:12px;
+}
+.output-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-style:italic;color:var(--primary)}
+.btn-copiar-tudo{
+  padding:10px 18px;background:var(--soft);border:1.5px solid var(--border);
+  color:var(--text);border-radius:999px;font-family:'DM Sans',sans-serif;
+  font-size:13px;font-weight:500;cursor:pointer;transition:all .2s;
+}
+.btn-copiar-tudo:hover{background:var(--primary);color:#fff;border-color:var(--primary)}
+
+/* STORY CARD */
+.story-card{
+  background:var(--white);border:1px solid var(--border);border-radius:16px;
+  overflow:hidden;margin-bottom:14px;transition:box-shadow .2s;
+}
+.story-card:hover{box-shadow:0 4px 20px rgba(0,0,0,.08)}
+.story-header{
+  background:linear-gradient(135deg,var(--story-bg) 0%,#2a1f18 100%);
+  color:var(--story-text);padding:14px 20px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.story-num{font-family:'Cormorant Garamond',serif;font-size:24px;font-style:italic;opacity:.9}
+.story-copy-btn{
+  background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);
+  color:#fff;padding:6px 14px;border-radius:999px;font-family:'DM Sans',sans-serif;
+  font-size:12px;cursor:pointer;transition:all .2s;
+}
+.story-copy-btn:hover{background:rgba(255,255,255,.22)}
+.story-body{
+  padding:20px 22px;display:grid;
+  grid-template-columns:1fr 1.6fr;gap:20px;
+}
+@media(max-width:560px){.story-body{grid-template-columns:1fr}}
+.story-image-col{
+  background:var(--soft);border:1px dashed var(--border);
+  border-radius:12px;padding:16px;
+}
+.story-image-label{
+  font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:1px;
+  color:var(--gold);margin-bottom:8px;display:flex;align-items:center;gap:6px;
+}
+.story-image-label::before{content:'📸';font-size:12px}
+.story-image-text{font-size:13px;color:var(--muted);line-height:1.6;font-style:italic}
+.story-copy-label{
+  font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:1px;
+  color:var(--primary);margin-bottom:8px;display:flex;align-items:center;gap:6px;
+}
+.story-copy-label::before{content:'✍️';font-size:12px}
+.story-copy-text{font-size:14px;color:var(--text);line-height:1.7;white-space:pre-wrap}
+
+/* ERROR */
+.error-box{
+  background:#fbe6e1;border:1px solid #d98a7a;border-radius:12px;
+  padding:16px 20px;font-size:13px;color:#8a3a2e;margin-top:12px;line-height:1.5;
+}
+
+/* FOOTER */
+footer{
+  text-align:center;padding:32px 20px;color:var(--muted);font-size:12px;
+  border-top:1px solid var(--border);background:var(--white);
+}
+footer .brand{font-weight:600;color:var(--primary)}
+footer .tag{font-style:italic;margin-top:4px;font-size:11px;opacity:.7}
+</style>
+</head>
+<body>
+<header>
+  <h1>RL Marketing</h1>
+  <p>Gerador de Sequências de Stories</p>
+</header>
+<div class="container">
+  <div class="intro">
+    <p><strong>Como funciona:</strong> escolha uma das 6 estratégias abaixo. Responda as perguntas com suas próprias palavras — a IA cuida da estrutura e monta a sequência de stories completa, story por story, com sugestão de imagem e copy pronta para usar.</p>
+  </div>
+
+  <div class="strategies-grid" id="strategiesGrid"></div>
+
+  <div class="form-section" id="formSection">
+    <div class="form-header">
+      <div class="form-num" id="formNum">01</div>
+      <div>
+        <div class="form-title" id="formTitle"></div>
+        <div class="form-sub" id="formSub"></div>
+      </div>
+    </div>
+    <div class="form-tip">💬 Responda como se estivesse contando pra uma amiga. Sem estruturar, sem roteiro — só a sua experiência real. A IA transforma isso em stories.</div>
+    <div id="formFields"></div>
+    <button class="btn-gerar" id="btnGerar">
+      <div class="spinner"></div>
+      <span class="btn-text">✦ Gerar sequência de stories</span>
+    </button>
+    <div class="error-box" id="errorBox" style="display:none"></div>
+  </div>
+
+  <div class="output-section" id="outputSection">
+    <div class="output-header">
+      <div class="output-title" id="outputTitle">Sua sequência</div>
+      <button class="btn-copiar-tudo" id="btnCopiarTudo">Copiar tudo</button>
+    </div>
+    <div id="storiesOutput"></div>
+  </div>
+</div>
+
+<footer>
+  <div><span class="brand">RL Marketing</span> · @rebecalopes.mkt · Marketing médico intencional</div>
+  <div class="tag">Empresa organizada proporciona leveza na vida.</div>
+</footer>
+
+<script>
+const STRATEGIES = [
+  {
+    num:'01',title:'Compartilhar o processo',
+    desc:'Mostra o bastidor do seu trabalho — o que acontece por trás do resultado.',
+    how:'Bastidores do atendimento, do início ao fim',
+    questions:[
+      {id:'nome_esp',label:'Quem é você e o que você faz?',hint:'Nome, especialidade e cidade',placeholder:'Ex: Sou a Dra. Paola Melo, harmonizadora facial em Goiânia',type:'text'},
+      {id:'dia_a_dia',label:'Me conta um dia típico no seu consultório — do começo ao fim.',hint:'Como começa, o que acontece, como termina. Sem filtro.',placeholder:'Ex: Chego cedo, organizo o ambiente antes da primeira paciente, a consulta começa com conversa de 30min antes de tocar em qualquer produto...',type:'textarea'},
+      {id:'invisivel',label:'Qual parte do seu trabalho as pessoas de fora não enxergam?',hint:'O que você faz que ninguém vê — mas que faz toda a diferença',placeholder:'Ex: Passo horas estudando o rosto da paciente antes da consulta, monto um planejamento individual, nunca começo sem isso...',type:'textarea'},
+      {id:'comentario',label:'O que as pacientes mais comentam depois de viver o seu atendimento?',hint:'Pode ser uma frase que já ouviu de verdade',placeholder:'Ex: "Nunca fui num lugar que me ouviu assim", "Você não tinha pressa nenhuma"...',type:'textarea'}
+    ]
+  }
+];
+const SYSTEM_PROMPT = 'teste';
+let activeStrategy = null;
+function renderStrategies(){}
+renderStrategies();
+</script></body></html>
