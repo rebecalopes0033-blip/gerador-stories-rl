@@ -274,10 +274,219 @@ const STRATEGIES = [
       {id:'invisivel',label:'Qual parte do seu trabalho as pessoas de fora não enxergam?',hint:'O que você faz que ninguém vê — mas que faz toda a diferença',placeholder:'Ex: Passo horas estudando o rosto da paciente antes da consulta, monto um planejamento individual, nunca começo sem isso...',type:'textarea'},
       {id:'comentario',label:'O que as pacientes mais comentam depois de viver o seu atendimento?',hint:'Pode ser uma frase que já ouviu de verdade',placeholder:'Ex: "Nunca fui num lugar que me ouviu assim", "Você não tinha pressa nenhuma"...',type:'textarea'}
     ]
+  },
+  {
+    num:'02',title:'Gerar conversa',
+    desc:'Cria interação real com a audiência através de enquetes e caixinhas.',
+    how:'Perguntas e enquetes que as pessoas realmente querem responder',
+    questions:[
+      {id:'nome_esp',label:'Quem é você e o que você faz?',hint:'Nome, especialidade e cidade',placeholder:'Ex: Sou a Dra. Paola Melo, harmonizadora facial em Goiânia',type:'text'},
+      {id:'pergunta_todo_dia',label:'Qual a pergunta que você recebe TODO DIA — mas que quase nunca aparece em perfis médicos?',hint:'Aquela dúvida que cansa, mas que você sabe que é legítime',placeholder:'Ex: "Vou ficar artificial?", "Quanto tempo dura?", "Qual a diferença entre preenchedor e bótox?"...',type:'textarea'},
+      {id:'mito',label:'Qual o maior mito ou erro que você vê a sua audiência cometendo?',hint:'Pode ser sobre o procedimento, sobre cuidado com a pele, sobre o que esperar...',placeholder:'Ex: Acharem que harmonização é igual pra todo mundo, ou que dói muito...',type:'textarea'},
+      {id:'curiosidade',label:'Se você pudesse perguntar UMA coisa pra sua audiência agora, o que seria?',hint:'O que você quer entender melhor sobre elas?',placeholder:'Ex: Se elas já fizeram algum procedimento estético, se têm medo do que vão achar...',type:'textarea'}
+    ]
+  },
+  {
+    num:'03',title:'Usar a história',
+    desc:'Conexão real com a audiência a partir da sua trajetória.',
+    how:'Um ponto de conexão humana que cria identificação',
+    questions:[
+      {id:'nome_esp',label:'Quem é você e o que você faz?',hint:'Nome, especialidade e cidade',placeholder:'Ex: Sou a Dra. Paola Melo, harmonizadora facial em Goiânia',type:'text'},
+      {id:'inicio',label:'Como foi o início? O que te fez escolher essa especialidade?',hint:'Pode ser um momento, uma sensação, uma decisão difícil',placeholder:'Ex: Comecei na cirurgia, mas percebi que queria ver o resultado no rosto da pessoa no mesmo dia...',type:'textarea'},
+      {id:'dificuldade',label:'Qual foi a parte mais difícil da sua trajetória até chegar aqui?',hint:'Sem dourar — o que foi real e pesado?',placeholder:'Ex: Montar o consultório sem ter capital, a insegurança no começo, lidar com a pressão de dar certo...',type:'textarea'},
+      {id:'hoje',label:'Hoje, o que você tem que a sua versão de 5 anos atrás sonhava ter?',hint:'Pode ser concreto (consultório, agenda) ou emocional (segurança, reconhecimento)',placeholder:'Ex: Agenda cheia, uma equipe, pacientes que me indicam, a liberdade de escolher os casos...',type:'textarea'}
+    ]
+  },
+  {
+    num:'04',title:'Expor feedbacks e directs',
+    desc:'Mostra o resultado real de quem já passou pelo seu atendimento.',
+    how:'A transformação do cliente em palavras — não sua, dela',
+    questions:[
+      {id:'nome_esp',label:'Quem é você e o que você faz?',hint:'Nome, especialidade e cidade',placeholder:'Ex: Sou a Dra. Paola Melo, harmonizadora facial em Goiânia',type:'text'},
+      {id:'caso',label:'Me conta o caso de uma paciente que te marcou — como ela chegou e como foi embora.',hint:'Não precisa dar nome. Conta a situação.',placeholder:'Ex: Chegou muito insegura, não queria tirar foto há anos, tinha medo de ficar artificial...',type:'textarea'},
+      {id:'palavras_dela',label:'O que essa paciente falou depois — seja pessoalmente, no direct, ou numa avaliação?',hint:'Se lembrar das palavras dela, melhor ainda. Se não, conta a essência.',placeholder:'Ex: Ela me mandou um áudio chorando dizendo que se sentiu ela mesma de novo...',type:'textarea'},
+      {id:'mudanca_real',label:'O que mudou na vida dessa paciente além da estética?',hint:'Autoestima, coragem, relacionamentos, trabalho, autoimagem...',placeholder:'Ex: Ela voltou a tirar foto com os filhos, parou de se esconder nas reuniões...',type:'textarea'}
+    ]
+  },
+  {
+    num:'05',title:'Tour pelo serviço',
+    desc:'Mostra por dentro tudo que a paciente recebe — do início ao fim.',
+    how:'O que está incluso que as pessoas nem imaginam',
+    questions:[
+      {id:'nome_esp',label:'Quem é você e o que você faz?',hint:'Nome, especialidade e cidade',placeholder:'Ex: Sou a Dra. Paola Melo, harmonizadora facial em Goiânia',type:'text'},
+      {id:'jornada',label:'Quando alguém agenda com você, o que ela vai viver do primeiro contato até o final do processo?',hint:'Passo a passo real — sem pular nada',placeholder:'Ex: Primeiro tem uma triagem por mensagem, depois agenda a consulta de 1h onde a gente conversa...',type:'textarea'},
+      {id:'surpresa',label:'Qual parte do seu serviço as pessoas ficam mais surpresas quando descobrem?',hint:'O que elas não esperavam que estivesse incluso?',placeholder:'Ex: Que a consulta dura 1 hora e é só conversa, que eu monto um planejamento visual personalizado...',type:'textarea'},
+      {id:'objecao',label:'O que a maioria das pessoas que ainda não agendou acha — mas está errada?',hint:'O medo ou ideia que te impede de converter',placeholder:'Ex: Que vai demorar muito para ver resultado, que vai ficar artificial, que é muito caro...',type:'textarea'}
+    ]
+  },
+  {
+    num:'06',title:'Revelar valor ancorado',
+    desc:'Mostra tudo que você entrega e provoca a percepção do valor real.',
+    how:'"Quanto você pagaria?" → revelar o que está incluso → revelar o valor',
+    questions:[
+      {id:'nome_esp',label:'Quem é você e o que você faz?',hint:'Nome, especialidade e cidade',placeholder:'Ex: Sou a Dra. Paola Melo, harmonizadora facial em Goiânia',type:'text'},
+      {id:'tudo_incluso',label:'Lista tudo que está incluso no seu protocolo ou serviço principal — sem deixar nada de fora.',hint:'Consulta, materiais, tempo de atendimento, pós, acompanhamento, o que mais tiver',placeholder:'Ex: Consulta de 1h, análise facial completa, planejamento visual, procedimento, produtos premium, retorno...',type:'textarea'},
+      {id:'lifestyle',label:'Tem algo no seu dia a dia — ambiente, rotina, produtos — que gera curiosidade ou admiração?',hint:'O que as pessoas comentam sobre o seu jeito de trabalhar?',placeholder:'Ex: O ambiente do consultório é todo personalizado, uso os mesmos produtos que aplico nas pacientes...',type:'textarea'},
+      {id:'valor',label:'Qual é o valor do seu protocolo ou serviço principal?',hint:'Não vai aparecer diretamente — é só para calibrar a âncora',placeholder:'Ex: a partir de R$ 3.000',type:'text'}
+    ]
   }
 ];
-const SYSTEM_PROMPT = 'teste';
+
+const SYSTEM_PROMPT = `Você é especialista em criação de stories para profissionais de saúde no Instagram.
+Crie sequências de stories autênticas, no tom de voz da profissional — como se ela mesma estivesse falando.
+
+REGRAS OBRIGATÓRIAS:
+- Nunca use "Não é sobre X, é sobre Y" — proibido
+- Nunca use "Mais do que X, é Y" — proibido
+- Nunca use frases motivacionais genéricas
+- Nunca use "transformar", "incrível", "poderoso" como adjetivos
+- A copy precisa soar como uma pessoa real falando, não como IA
+- Cada story tem: SUGESTÃO DE IMAGEM e COPY (texto para aparecer no story)
+- Copy curta, direto ao ponto — stories são rápidos
+- Tom: próximo, autêntico, sem exagero
+- Use as palavras e expressões que a própria profissional usou nas respostas
+
+FORMATO DE RESPOSTA — use EXATAMENTE este formato JSON:
+{
+  "titulo": "nome curto da sequência",
+  "stories": [
+    {
+      "num": 1,
+      "imagem": "descrição da imagem/vídeo sugerido",
+      "copy": "texto do story"
+    }
+  ]
+}
+Retorne SOMENTE o JSON, sem texto antes ou depois.`;
+
 let activeStrategy = null;
-function renderStrategies(){}
+
+function renderStrategies(){
+  const grid = document.getElementById('strategiesGrid');
+  grid.innerHTML = STRATEGIES.map((s,i) => `
+    <div class="strategy-card" onclick="selectStrategy(${i})">
+      <div class="card-num">${s.num}</div>
+      <div class="card-title">${s.title}</div>
+      <div class="card-desc">${s.desc}</div>
+      <div class="card-how">${s.how}</div>
+    </div>
+  `).join('');
+}
+
+function selectStrategy(i){
+  activeStrategy = i;
+  const s = STRATEGIES[i];
+  document.querySelectorAll('.strategy-card').forEach((c,j) => c.classList.toggle('active', j===i));
+  document.getElementById('formNum').textContent = s.num;
+  document.getElementById('formTitle').textContent = s.title;
+  document.getElementById('formSub').textContent = s.how;
+  document.getElementById('formFields').innerHTML = s.questions.map(q => `
+    <div class="field">
+      <label class="label">
+        ${q.label}
+        ${q.hint ? `<span class="label-hint">${q.hint}</span>` : ''}
+      </label>
+      ${q.type === 'textarea'
+        ? `<textarea id="q_${q.id}" placeholder="${q.placeholder}" rows="3"></textarea>`
+        : `<input type="text" id="q_${q.id}" placeholder="${q.placeholder}"/>`}
+    </div>
+  `).join('');
+  document.getElementById('formSection').classList.add('visible');
+  document.getElementById('outputSection').classList.remove('visible');
+  document.getElementById('errorBox').style.display = 'none';
+  setTimeout(() => document.getElementById('formSection').scrollIntoView({behavior:'smooth',block:'start'}), 100);
+}
+
+document.getElementById('btnGerar').addEventListener('click', async () => {
+  if (activeStrategy === null) return;
+  const s = STRATEGIES[activeStrategy];
+  const inputs = {};
+  s.questions.forEach(q => {
+    const el = document.getElementById('q_'+q.id);
+    inputs[q.id] = el ? el.value.trim() : '';
+  });
+  if (!inputs.nome_esp) {
+    showError('Preencha pelo menos o primeiro campo (quem é você e o que você faz) para continuar.');
+    return;
+  }
+  const btn = document.getElementById('btnGerar');
+  btn.classList.add('loading');
+  btn.disabled = true;
+  document.getElementById('errorBox').style.display = 'none';
+  document.getElementById('outputSection').classList.remove('visible');
+
+  const count = {'01':10,'02':7,'03':9,'04':10,'05':8,'06':10}[s.num] || 8;
+  const promptParts = [`Crie uma sequência de ${count} stories para a estratégia "${s.title}" (${s.how}).\n\nRespostas da profissional (use as próprias palavras dela como base):`];
+  s.questions.forEach(q => { if (inputs[q.id]) promptParts.push(`\n[${q.label}]\n${inputs[q.id]}`); });
+  promptParts.push(`\nImportante: os stories precisam soar como essa profissional mesma falando. Use as expressões e o tom dela.`);
+
+  try {
+    const res = await fetch('/api/generate', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ prompt: promptParts.join('\n'), systemPrompt: SYSTEM_PROMPT })
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || `Erro ${res.status}`);
+    const raw = data.content?.[0]?.text || '';
+    const match = raw.match(/\{[\s\S]*\}/);
+    if (!match) throw new Error('Resposta inesperada da IA. Tente novamente.');
+    renderOutput(JSON.parse(match[0]), s.title);
+  } catch(err) {
+    showError('Não foi possível gerar a sequência: ' + err.message);
+  } finally {
+    btn.classList.remove('loading');
+    btn.disabled = false;
+  }
+});
+
+function renderOutput(data, fallbackTitle){
+  document.getElementById('outputTitle').textContent = data.titulo || fallbackTitle;
+  document.getElementById('storiesOutput').innerHTML = data.stories.map(s => `
+    <div class="story-card">
+      <div class="story-header">
+        <div class="story-num">Story ${s.num}</div>
+        <button class="story-copy-btn" onclick="copyStory(${s.num-1},this)">Copiar</button>
+      </div>
+      <div class="story-body">
+        <div class="story-image-col">
+          <div class="story-image-label">Sugestão de imagem</div>
+          <div class="story-image-text">${esc(s.imagem)}</div>
+        </div>
+        <div class="story-copy-col">
+          <div class="story-copy-label">Copy do story</div>
+          <div class="story-copy-text">${esc(s.copy)}</div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+  window._stories = data.stories;
+  document.getElementById('outputSection').classList.add('visible');
+  setTimeout(() => document.getElementById('outputSection').scrollIntoView({behavior:'smooth',block:'start'}), 100);
+}
+
+function copyStory(i, btn){
+  const s = window._stories[i];
+  navigator.clipboard.writeText(`📸 IMAGEM: ${s.imagem}\n\n✍️ COPY: ${s.copy}`).then(() => {
+    btn.textContent = 'Copiado!';
+    setTimeout(() => btn.textContent = 'Copiar', 1500);
+  });
+}
+
+document.getElementById('btnCopiarTudo').addEventListener('click', () => {
+  if (!window._stories) return;
+  const text = window._stories.map(s => `--- STORY ${s.num} ---\n📸 IMAGEM: ${s.imagem}\n✍️ COPY: ${s.copy}`).join('\n\n');
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('btnCopiarTudo');
+    btn.textContent = 'Copiado!';
+    setTimeout(() => btn.textContent = 'Copiar tudo', 1500);
+  });
+});
+
+function showError(msg){ const b = document.getElementById('errorBox'); b.textContent = msg; b.style.display = 'block'; }
+function esc(s){ return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
 renderStrategies();
-</script></body></html>
+</script>
+</body>
+</html>
