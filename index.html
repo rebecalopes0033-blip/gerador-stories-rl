@@ -431,7 +431,9 @@ document.getElementById('btnGerar').addEventListener('click', async () => {
     const raw = data.content?.[0]?.text || '';
     const match = raw.match(/\{[\s\S]*\}/);
     if (!match) throw new Error('Resposta inesperada da IA. Tente novamente.');
-    renderOutput(JSON.parse(match[0]), s.title);
+    // Remove trailing commas before } or ] (common in AI-generated JSON)
+    const cleaned = match[0].replace(/,(\s*[}\]])/g, '$1');
+    renderOutput(JSON.parse(cleaned), s.title);
   } catch(err) {
     showError('Não foi possível gerar a sequência: ' + err.message);
   } finally {
