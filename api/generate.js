@@ -15,7 +15,7 @@ export default async function handler(req, res) {
 
   try {
     const body = {
-      model: 'claude-sonnet-4-6',
+      model: 'claude-haiku-4-5-20251001',
       max_tokens: 2000,
       messages: [{ role: 'user', content: prompt }]
     };
@@ -47,6 +47,8 @@ export default async function handler(req, res) {
       return res.status(response.status).json({ error: data?.error?.message || 'Erro na API.' });
     }
 
+    // Anthropic retorna: { content: [{ type: 'text', text: '...' }] }
+    // O frontend lê: data.content?.[0]?.text — funciona direto
     return res.status(200).json({ content: data.content });
 
   } catch (err) {
