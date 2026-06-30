@@ -473,6 +473,22 @@ O último story nunca encerra vendendo. Ele apenas abre a porta.
 A paciente precisa sentir que será bem recebida. Nunca pressionada.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━
+EXEMPLO DE RITMO E ESTILO
+━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Este é o padrão de escrita que você deve seguir em todos os stories.
+Frases curtas. Cada ideia em uma linha separada. Virada no final que pousa com peso. Zero palavras de preenchimento.
+
+Exemplo:
+
+IMAGEM: Tablet com fotos da paciente, análise facial.
+
+Eu nunca recebo uma paciente “do zero”.
+Antes dela chegar, observo as proporções do rosto, analiso a harmonia facial e começo a pensar nas possibilidades.
+Porque um bom resultado não começa na seringa.
+Começa no planejamento.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━
 PARTE IV — O QUE EVITAR
 ━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -577,8 +593,7 @@ document.getElementById('btnGerar').addEventListener('click', async () => {
   document.getElementById('errorBox').style.display = 'none';
   document.getElementById('outputSection').classList.remove('visible');
 
-  const count = {'01':10,'02':7,'03':9,'04':10,'05':8,'06':10}[s.num] || 8;
-  const promptParts = [`Crie uma sequência de ${count} stories para a estratégia "${s.title}" (${s.how}).\n\nRespostas da profissional (use as próprias palavras dela como base):`];
+  const promptParts = [`Crie uma sequência de exatamente 6 stories para a estratégia "${s.title}" (${s.how}).\n\nRespostas da profissional (use as próprias palavras dela como base):`];
   s.questions.forEach(q => { if (inputs[q.id]) promptParts.push(`\n[${q.label}]\n${inputs[q.id]}`); });
   promptParts.push(`\nImportante: os stories precisam soar como essa profissional mesma falando. Use as expressões e o tom dela.`);
 
