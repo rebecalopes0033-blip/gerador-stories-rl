@@ -3,7 +3,7 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Método não permitido' });
   }
 
-  const apiKey = process.env.GEMINI_API_KEY;
+  const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) {
     return res.status(500).json({ error: 'Chave da API não configurada no servidor.' });
   }
@@ -15,36 +15,40 @@ export default async function handler(req, res) {
 
   try {
     const body = {
-      contents: [{ role: 'user', parts: [{ text: prompt }] }],
-      generationConfig: { maxOutputTokens: 2000 }
+      model: 'claude-sonnet-4-6',
+      max_tokens: 2000,
+      messages: [{ role: 'user', content: prompt }]
     };
+
     if (systemPrompt) {
-      body.systemInstruction = { parts: [{ text: systemPrompt }] };
+      body.system = systemPrompt;
     }
 
-    const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body)
-      }
-    );
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': apiKey,
+        'anthropic-version': '2023-06-01'
+      },
+      body: JSON.stringify(body)
+    });
 
     const rawText = await response.text();
+
     let data;
     try {
       data = JSON.parse(rawText);
-    } catch (e) {
-      return res.status(500).json({ error: 'Resposta invalida da API: ' + rawText.slice(0, 200) });
+    } catch {
+      return res.status(500).json({ error: `Resposta inválida da API: ${rawText.slice(0, 200)}` });
     }
 
     if (!response.ok) {
       return res.status(response.status).json({ error: data?.error?.message || 'Erro na API.' });
     }
 
-    const text = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
-    return res.status(200).json({ content: [{ text }] });
+    return res.status(200).json({ content: data.content });
+
   } catch (err) {
     return res.status(500).json({ error: err.message });
   }
